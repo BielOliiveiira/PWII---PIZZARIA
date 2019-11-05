@@ -18,7 +18,7 @@ export class ComandaComponent implements OnInit {
       pizza : this.formBuilder.control(''),
       recheio : this.formBuilder.control(''),
       pessoas : this.formBuilder.control(''),
-      taxaServico : this.formBuilder.control(false)
+      taxaServico : this.formBuilder.control(true)
     })
   }
 
@@ -27,16 +27,29 @@ export class ComandaComponent implements OnInit {
     let vlPizza:number = this.formComanda.value.pizza * 31.50;
     let vlRecheio:number = this.formComanda.value.recheio * 5.90;
     let vlPessoas:number = this.formComanda.value.pessoas;
-    let taxaServico:boolean = this.formComanda.value.taxaServico;
+    let TaxaServico:boolean = this.formComanda.value.taxaServico;
     let vlConsumo:number = (vlChopp + vlPizza + vlRecheio);
     let vlTaxaServico: number = vlConsumo * 0.1;
     let vlTotal:number;
     let vlPorPessoa:number = vlTotal / vlPessoas;
 
-    if (taxaServico == true)
+    if (TaxaServico == true)
     {
-      vlConsumo + vlTaxaServico == vlTotal
+      vlTotal = vlConsumo + vlTaxaServico;
+      vlPorPessoa = vlTotal / vlPessoas;
+      alert ("Consumo: " +vlConsumo + 
+           "\n Serviços: " +vlTaxaServico +
+           "\n Total: " +vlTotal +
+           "\n Por pessoa: " +vlPorPessoa)
     }
+    else{
+      vlTotal = vlConsumo
+      vlPorPessoa = vlTotal / vlPessoas;
+      alert ("Consumo: " +vlConsumo + 
+           "\n Total: " +vlTotal +
+           "\n Por pessoa: " +vlPorPessoa)
+    }
+    
     
     
     
